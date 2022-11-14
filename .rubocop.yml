@@ -6,6 +6,9 @@ require:
 AllCops:
   NewCops: enable
 
+GraphQL/FieldDescription:
+  Enabled: false
+
 GraphQL/ObjectDescription:
   Enabled: false
 
