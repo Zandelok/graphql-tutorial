@@ -7,5 +7,6 @@ module Types
     field :url, String, null: false
 
     field :posted_by, UserType, null: true, method: :user
+    field :votes, [Types::VoteType], null: false
   end
 end

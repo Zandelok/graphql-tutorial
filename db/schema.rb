@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_14_061835) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_14_094125) do
   create_table "links", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "url"
     t.text "description"
@@ -29,5 +29,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_14_061835) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "votes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "link_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_votes_on_link_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "links", "users"
+  add_foreign_key "votes", "links"
+  add_foreign_key "votes", "users"
 end
