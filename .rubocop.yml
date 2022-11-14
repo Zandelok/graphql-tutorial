@@ -1,0 +1,16 @@
+require:
+  - rubocop-rails
+  - rubocop-graphql
+
+
+AllCops:
+  NewCops: enable
+
+GraphQL/ObjectDescription:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/Documentation:
+  Enabled: false
