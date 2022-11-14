@@ -5,7 +5,7 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    field :all_links, [LinkType], null: false
+    field :all_links, resolver: Resolvers::LinksSearch
     field :all_users, [UserType]
 
     def all_links
