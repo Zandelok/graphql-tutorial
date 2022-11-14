@@ -5,7 +5,10 @@ class GraphqlController < ApplicationController
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = {}
+    context = {
+      session:,
+      current_user:
+    }
     result = GraphqlTutorialSchema.execute(query, variables:, context:,
                                                   operation_name:)
     render json: result
@@ -16,6 +19,17 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def current_user
+    return unless session[:token]
+
+    crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
+    token = crypt.decrypt_and_verify(session[:token])
+    user_id = token.gsub('user-id:', '').to_i
+    User.find_by(id: user_id)
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    nil
+  end
 
   def prepare_variables(variables_param)
     case variables_param

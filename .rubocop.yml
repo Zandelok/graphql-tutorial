@@ -9,6 +9,9 @@ AllCops:
 GraphQL/ArgumentDescription:
   Enabled: false
 
+GraphQL/ExtractType:
+  Enabled: false
+
 GraphQL/FieldDescription:
   Enabled: false
 

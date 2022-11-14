@@ -6,9 +6,14 @@ module Types
     include GraphQL::Types::Relay::HasNodesField
 
     field :all_links, [LinkType], null: false
+    field :all_users, [UserType]
 
     def all_links
       Link.all
+    end
+
+    def all_users
+      User.all
     end
   end
 end
